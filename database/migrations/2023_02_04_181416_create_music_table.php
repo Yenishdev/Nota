@@ -15,7 +15,14 @@ return new class extends Migration
     {
         Schema::create('music', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('genre_id')->index();
+            $table->foreign('genre_id')->references('id')->on('genres')->cascadeOnDelete();
+            $table->unsignedBigInteger('singer_id')->index();
+            $table->foreign('singer_id')->references('id')->on('singers')->cascadeOnDelete();
+            $table->unsignedInteger('favorites')->default(0);
+            $table->unsignedInteger('viewed')->default(0);
+            $table->unsignedFloat('duration');
+            $table->timestamp('created_at');
         });
     }
 

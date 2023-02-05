@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('singers', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->unique();
+            $table->unsignedInteger('favorites')->default(0);
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
