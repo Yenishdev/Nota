@@ -16,8 +16,9 @@ return new class extends Migration
         Schema::create('albums', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('singer_id')->index();
-            $table->foreign('singer_id')->references('id')->on('singer')->cascadeOnDelete();
+            $table->foreign('singer_id')->references('id')->on('singers')->cascadeOnDelete();
             $table->string('name');
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }

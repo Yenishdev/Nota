@@ -7,5 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Singer extends Model
 {
-    use HasFactory;
+    protected $guarded = [
+        'id',
+    ];
+
+
+
+    public function music()
+    {
+        return $this->hasMany(Music::class);
+    }
+
+    public function album()
+    {
+        return $this->hasMany(Album::class);
+    }
+
+
 }

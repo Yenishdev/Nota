@@ -19,7 +19,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
+        'username',
         'password',
     ];
 
@@ -38,7 +38,33 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+
+    public $timestamps = false;
+
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
+    public function playlist()
+    {
+        return $this->hasMany(Playlist::class)
+            ->orderBy('id', 'desc');
+    }
+
+    public function isAdmin()
+    {
+        if ($this->is_admin) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
